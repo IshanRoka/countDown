@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: rgb(194, 78, 194);
+        }
+        h2{
+            font-size: 30px;
+        }
+        .year{
+            font-size: 40px;
+            margin: 20px 0;
+        }
+        .countdown{
+            height: 200px;
+            width: 100%;
+            background-color: rgb(205, 46, 205);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .countdown div::before{
+            content: "";
+            bottom: 0px;
+            position: absolute;
+        }
+        div{
+            margin: 0 45px;
+            font-size: 2.5rem;
+        }
+        #day::before{
+            content: "days";
+        }
+        #hour::before{
+            content: "hour";
+        }
+        #min::before{
+            content: "min";
+        }
+        #sec::before{
+            content: "sec";
+        }
+    </style>
+</head>
+<body>
+    <h2>Counter to New Year</h2>
+    <div class="year">2025</div>
+    <div class="countdown">
+        <div id="day">00</div>
+        <div id="hour">00</div>
+        <div id="min">00</div>
+        <div id="sec">00</div>
+    </div>
+    <script>
+        const day = document.querySelector("#day");
+        const hour = document.querySelector("#hour");
+        const min = document.querySelector("#min");
+        const sec = document.querySelector("#sec");
+    
+        const newYearDate = new Date("Jan 1, 2025 00:00:00").getTime();
+    
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const gap = newYearDate - now;
+    
+            const se = 1000;
+            const mi = se * 60;
+            const ho = mi * 60;
+            const da = ho * 24;
+    
+            const d = Math.floor(gap / da);
+            const h = Math.floor((gap % da) / ho);
+            const m = Math.floor((gap % ho) / mi);
+            const s = Math.floor((gap % mi) / se);
+    
+            day.innerHTML = d;
+            hour.innerHTML = h;
+            min.innerHTML = m;
+            sec.innerHTML = s;
+    
+            setTimeout(() => {
+                updateCountdown();
+            }, 1000);
+        }
+    
+        updateCountdown();
+    </script>
+    
+</body>
+</html>
